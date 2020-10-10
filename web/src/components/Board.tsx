@@ -1,9 +1,10 @@
 import { ItemTypes } from 'model/ItemTypes'
-import React, { ReactElement, useCallback, useState } from 'react'
+import React, { ReactElement, useCallback, useContext } from 'react'
 import { useDrop, XYCoord } from 'react-dnd'
 import update from 'immutability-helper'
 import { DraggableBox } from './DraggableBox'
 import { PostCard } from './PostCard'
+import { PostContext } from 'providers/PostProviders'
 
 interface DragItem {
   id: string
@@ -12,9 +13,11 @@ interface DragItem {
   top: number
 }
 
+const SuggestionAreaWidth = 200
+
 const styles: React.CSSProperties = {
-  width: 300,
-  height: 300,
+  width: `calc(100vw - ${SuggestionAreaWidth}px)`,
+  height: '100vh',
   border: '1px solid black',
   position: 'relative',
 }
@@ -24,10 +27,7 @@ interface BoxMap {
 }
 
 function Board(): ReactElement {
-  const [boxes, setBoxes] = useState<BoxMap>({
-    a: { top: 20, left: 80, title: 'Drag me around' },
-    b: { top: 180, left: 20, title: 'Drag me too' },
-  })
+  const { postMap, setPostMap } = useContext(PostContext)
 
   const [, drop] = useDrop({
     accept: ItemTypes.BOX,
@@ -42,23 +42,23 @@ function Board(): ReactElement {
 
   const moveBox = useCallback(
     (id: string, left: number, top: number) => {
-      setBoxes(
-        update(boxes, {
+      setPostMap(
+        update(postMap, {
           [id]: {
             $merge: { left, top },
           },
         })
       )
     },
-    [boxes]
+    [postMap, setPostMap]
   )
 
   return (
     <div ref={drop} style={styles}>
-      {Object.keys(boxes).map((key) => {
-        const { title } = boxes[key]
+      {Object.keys(postMap).map((key) => {
+        const { title } = postMap[key]
         return (
-          <DraggableBox key={key} id={key} {...boxes[key]}>
+          <DraggableBox key={key} {...postMap[key]}>
             <PostCard title={title} />
           </DraggableBox>
         )
