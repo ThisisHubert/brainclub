@@ -8,6 +8,7 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import SuggestionList from 'components/SuggestionList'
+import { ActionButton } from './ActionButton'
 
 function SuggestingDrawer(): ReactElement {
   const classes = useStyles()
@@ -51,13 +52,10 @@ function SuggestingDrawer(): ReactElement {
     <div>
       {(['right'] as Anchor[]).map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button
-            color='primary'
-            className={classes.suggestingBtn}
-            onClick={toggleDrawer(anchor, true)}
-          >
-            Suggestion
-          </Button>
+          <ActionButton
+            title={'Suggestion'}
+            callback={() => toggleDrawer(anchor, true)}
+          />
           <Drawer
             anchor={anchor}
             open={state[anchor]}
@@ -89,7 +87,7 @@ const useStyles = makeStyles({
     fontSize: '16px',
     padding: '12px 32px',
     boxShadow: `0 3px 6px 0 rgba(0, 0, 0, 0.16)`,
-    border: `solid 1px #707070`
+    border: `solid 1px #707070`,
   },
 })
 
