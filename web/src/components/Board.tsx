@@ -16,8 +16,8 @@ interface DragItem {
 const styles: React.CSSProperties = {
   width: '100vw',
   height: '100vh',
-  border: '1px solid black',
   position: 'relative',
+  backgroundColor: '#DFE6ED'
 }
 
 function Board(): ReactElement {

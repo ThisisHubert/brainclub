@@ -25,6 +25,7 @@ interface PostContextType {
   addPost: (post: Post) => void
   updatePost: (id: string, text: string) => void
   organizePosts: () => void
+  deletePost: (id: string) => void
 }
 
 export const PostContext = createContext<PostContextType>(undefined as never)
@@ -42,16 +43,16 @@ function requestOrganizeMock(posts: Post[]): Cluster[] {
   return [
     {
       name: 'coffee',
-      postIds: ['1', '2', '3']
+      postIds: ['1', '2', '3'],
     },
     {
       name: 'bread',
-      postIds: ['4', '5']
+      postIds: ['4', '5'],
     },
     {
       name: 'chicken',
-      postIds: ['6', '7', '8']
-    }
+      postIds: ['6', '7', '8'],
+    },
   ]
 }
 
@@ -63,8 +64,8 @@ function PostProvider(props: Props): ReactElement {
     const posts = _.values(postMap)
     const clusters = requestOrganizeMock(posts)
     clusters.forEach((cluster, index) => {
-      const yPos = CLUSTER_SIZE.height * index
-      cluster.postIds.forEach((postId, index)=> {
+      const yPos = (CLUSTER_SIZE.height + ((index !== 0) ? 32 : 0 )) * index
+      cluster.postIds.forEach((postId, index) => {
         if (!postMap[postId]) {
           return
         }
@@ -73,10 +74,9 @@ function PostProvider(props: Props): ReactElement {
       })
     })
 
-    setPostMap(prev => ({
-      ...postMap
+    setPostMap((prev) => ({
+      ...postMap,
     }))
-
   }, [postMap])
 
   return (
@@ -98,6 +98,7 @@ function PostProvider(props: Props): ReactElement {
             },
           })),
         organizePosts,
+        deletePost: (id) => setPostMap(prev => _.omit(prev, id))
       }}
     >
       {props.children}
