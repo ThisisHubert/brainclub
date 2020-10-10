@@ -4,7 +4,7 @@ import { PostContext } from 'providers/PostProviders'
 import React, { ReactElement, useContext } from 'react'
 
 function ToolBar(): ReactElement {
-  const { addPost, organizePosts } = useContext(PostContext)
+  const { addPost } = useContext(PostContext)
   return (
     <Box width='50px' height='300px' border='1px solid black'>
       <Button
@@ -20,7 +20,6 @@ function ToolBar(): ReactElement {
         Add
       </Button>
       <Box mt={1} />
-      <Button onClick={() => organizePosts()}>Organize</Button>
     </Box>
   )
 }

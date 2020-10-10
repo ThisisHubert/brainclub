@@ -1,40 +1,37 @@
-import React, { ReactElement } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import React, { ReactElement } from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import Drawer from '@material-ui/core/Drawer'
+import Button from '@material-ui/core/Button'
+import List from '@material-ui/core/List'
+import Divider from '@material-ui/core/Divider'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
 import SuggestionList from 'components/SuggestionList'
 
-
 function SuggestingDrawer(): ReactElement {
-  const classes = useStyles();
+  const classes = useStyles()
   const [state, setState] = React.useState({
     right: false,
-  });
+  })
 
   const toggleDrawer = (anchor: Anchor, open: boolean) => (
-    event: React.KeyboardEvent | React.MouseEvent,
+    event: React.KeyboardEvent | React.MouseEvent
   ) => {
     if (
       event.type === 'keydown' &&
       ((event as React.KeyboardEvent).key === 'Tab' ||
         (event as React.KeyboardEvent).key === 'Shift')
     ) {
-      return;
+      return
     }
 
-    setState({ ...state, [anchor]: open });
-  };
-
-
+    setState({ ...state, [anchor]: open })
+  }
 
   const list = (anchor: Anchor) => (
     <div
-      role="presentation"
+      role='presentation'
       /*onClick={toggleDrawer(anchor, false)}*/
       onKeyDown={toggleDrawer(anchor, false)}
     >
@@ -48,25 +45,33 @@ function SuggestingDrawer(): ReactElement {
       <Divider />
       <SuggestionList />
     </div>
-  );
+  )
 
   return (
     <div>
       {(['right'] as Anchor[]).map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button color="primary" className={classes.suggestingBtn} onClick={toggleDrawer(anchor, true)}>💡 Suggestion</Button>
-          <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
+          <Button
+            color='primary'
+            className={classes.suggestingBtn}
+            onClick={toggleDrawer(anchor, true)}
+          >
+            Suggestion
+          </Button>
+          <Drawer
+            anchor={anchor}
+            open={state[anchor]}
+            onClose={toggleDrawer(anchor, false)}
+          >
             {list(anchor)}
           </Drawer>
         </React.Fragment>
       ))}
     </div>
-  );
+  )
 }
 
-function Display() {
-  
-}
+function Display() {}
 
 const useStyles = makeStyles({
   list: {
@@ -77,13 +82,18 @@ const useStyles = makeStyles({
   },
   suggestingBtn: {
     display: 'relative',
-    fontSize: '1.5rem',
-    border: '1, solid',
     right: '0',
-  }
-});
+    color: 'white',
+    backgroundColor: '#6036d3',
+    textTransform: 'none',
+    fontSize: '16px',
+    padding: '12px 32px',
+    boxShadow: `0 3px 6px 0 rgba(0, 0, 0, 0.16)`,
+    border: `solid 1px #707070`
+  },
+})
 
-type Anchor = 'right';
+type Anchor = 'right'
 
 /*
 const useStyles = makeStyles((theme) => ({
@@ -107,7 +117,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 */
 /*
-  
+
 function Suggestions(): ReactElement{
     const classes = useStyles()
     const [value, setValue] = useState<boolean>(true)
@@ -115,7 +125,7 @@ function Suggestions(): ReactElement{
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
           return;
         }
-    
+
         setState({ ...state, [anchor]: open });
       };
 
@@ -145,11 +155,10 @@ function Suggestions(): ReactElement{
                 </Drawer>
                 </React.Fragment>
             ))}
-            
-        
+
+
     )
 }
 
 */
-export default SuggestingDrawer;
-
+export default SuggestingDrawer

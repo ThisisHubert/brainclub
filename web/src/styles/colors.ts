@@ -28,6 +28,7 @@ enum AppColor {
   green = '#26d9ad',
   yellow = '#ffc019',
   transparent = 'rgba(255, 255, 255, 0.0)',
+  primary = '#6036d3'
 }
 
 export default AppColor

@@ -1,5 +1,5 @@
 import { CLUSTER_SIZE, POST_CARD_SIZE } from 'const'
-import _, { uniqueId } from 'lodash'
+import _ from 'lodash'
 import React, {
   createContext,
   ReactElement,

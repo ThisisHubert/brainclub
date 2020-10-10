@@ -7,7 +7,7 @@ import AppTypography from './fonts'
 const AppTheme = createMuiTheme({
   palette: {
     primary: {
-      main: AppColor.blue,
+      main: "#6036d3",
     },
     // Add secondary color if needed
     error: {
