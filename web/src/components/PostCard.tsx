@@ -1,6 +1,7 @@
 import { Box, makeStyles, TextField } from '@material-ui/core'
 import { POST_CARD_SIZE } from 'const'
-import React, { ReactElement } from 'react'
+import { PostContext } from 'providers/PostProviders'
+import React, { ReactElement, useContext } from 'react'
 
 interface StyleProps {
   backgroundColor: string
@@ -11,21 +12,18 @@ const useStyles = makeStyles({
     width: POST_CARD_SIZE.width,
     height: POST_CARD_SIZE.height,
     cursor: 'move',
-    backgroundColor: (props: StyleProps) => props.backgroundColor,
   },
 })
 
 export interface BoxProps {
+  id: string
   title: string
-  yellow?: boolean
 }
 
 // TODO: Apply style
-export function PostCard({ title, yellow }: BoxProps): ReactElement {
-  const backgroundColor = yellow ? 'yellow' : 'white'
-  const classes = useStyles({
-    backgroundColor,
-  })
+export function PostCard({ title, id }: BoxProps): ReactElement {
+  const classes = useStyles()
+  const { updatePost } = useContext(PostContext)
   return (
     <Box className={classes.root}>
       <TextField
@@ -34,6 +32,7 @@ export function PostCard({ title, yellow }: BoxProps): ReactElement {
         rows={4}
         defaultValue={title}
         InputProps={{ disableUnderline: true }}
+        onChange={(e) => updatePost(id, e.target.value)}
       />
     </Box>
   )

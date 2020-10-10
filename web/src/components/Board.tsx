@@ -55,7 +55,7 @@ function Board(): ReactElement {
         const { title } = postMap[key]
         return (
           <DraggableBox key={key} {...postMap[key]}>
-            <PostCard title={title} />
+            <PostCard id={key} title={title} />
           </DraggableBox>
         )
       })}
