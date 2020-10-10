@@ -13,7 +13,8 @@ interface StyleProps {
 }
 
 const useStyles = makeStyles({
-  avatar: {
+  container: {
+    backgroundColor: 'white',
     padding: '13px 18px',
     borderRadius: '16px',
     border: 'solid 1px #ededed',
@@ -34,8 +35,7 @@ export function Header(): ReactElement {
     >
       <Box display='flex' flexDirection='row' alignItems='center'>
         <Box
-          border='solid 1px #707070'
-          borderRadius={5}
+          className={classes.container}
           width={456}
           display='flex'
           px={5}
@@ -43,10 +43,11 @@ export function Header(): ReactElement {
           alignItems='center'
         >
           <Box height={32} width={32} bgcolor='#6036d3' />
-          <Box ml={7} />
-          <Typography variant={'h3'} color='primary'>
-            Brain Club
-          </Typography>
+          <Box ml={7}>
+            <Typography variant={'h3'} color='primary'>
+              Brain Club
+            </Typography>
+          </Box>
         </Box>
         <Box ml={2} />
         <Box
@@ -54,7 +55,7 @@ export function Header(): ReactElement {
           flexDirection='row'
           mr={2}
           bgcolor='white'
-          className={classes.avatar}
+          className={classes.container}
         >
           <Avatar src={image1} />
           <Box ml={0.5} />
