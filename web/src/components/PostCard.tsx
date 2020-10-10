@@ -1,4 +1,5 @@
-import { Box, makeStyles } from '@material-ui/core'
+import { Box, makeStyles, TextField } from '@material-ui/core'
+import { POST_CARD_SIZE } from 'const'
 import React, { ReactElement } from 'react'
 
 interface StyleProps {
@@ -7,7 +8,8 @@ interface StyleProps {
 
 const useStyles = makeStyles({
   root: {
-    padding: '0.5rem 1rem',
+    width: POST_CARD_SIZE.width,
+    height: POST_CARD_SIZE.height,
     cursor: 'move',
     backgroundColor: (props: StyleProps) => props.backgroundColor,
   },
@@ -24,5 +26,15 @@ export function PostCard({ title, yellow }: BoxProps): ReactElement {
   const classes = useStyles({
     backgroundColor,
   })
-  return <Box className={classes.root}>{title}</Box>
+  return (
+    <Box className={classes.root}>
+      <TextField
+        fullWidth
+        multiline
+        rows={4}
+        defaultValue={title}
+        InputProps={{ disableUnderline: true }}
+      />
+    </Box>
+  )
 }

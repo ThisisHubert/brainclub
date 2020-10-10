@@ -22,10 +22,6 @@ const styles: React.CSSProperties = {
   position: 'relative',
 }
 
-interface BoxMap {
-  [key: string]: { top: number; left: number; title: string }
-}
-
 function Board(): ReactElement {
   const { postMap, setPostMap } = useContext(PostContext)
 
