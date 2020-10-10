@@ -5,6 +5,7 @@ import update from 'immutability-helper'
 import { DraggableBox } from './DraggableBox'
 import { PostCard } from './PostCard'
 import { PostContext } from 'providers/PostProviders'
+import { ClusterBox } from './ClusterBox'
 
 interface DragItem {
   id: string
@@ -17,11 +18,10 @@ const styles: React.CSSProperties = {
   width: '100vw',
   height: '100vh',
   position: 'relative',
-  backgroundColor: '#DFE6ED'
 }
 
 function Board(): ReactElement {
-  const { postMap, setPostMap } = useContext(PostContext)
+  const { postMap, setPostMap, clusterMap } = useContext(PostContext)
 
   const [, drop] = useDrop({
     accept: ItemTypes.BOX,
@@ -56,6 +56,10 @@ function Board(): ReactElement {
             <PostCard id={key} title={title} />
           </DraggableBox>
         )
+      })}
+      {Object.keys(clusterMap).map((key) => {
+        const { title } = clusterMap[key]
+        return <ClusterBox key={key} id={key} title={title} />
       })}
     </div>
   )

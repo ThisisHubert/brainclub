@@ -6,11 +6,13 @@ import ToolBar from 'components/ToolBar'
 import { Box } from '@material-ui/core'
 import PostProvider from 'providers/PostProviders'
 import Suggestions from 'components/Suggestions'
+import { Header } from 'components/Header'
 
 function Home(): ReactElement {
   return (
     <DndProvider backend={HTML5Backend}>
       <PostProvider>
+        <Header />
         <Box display='flex' flexDirection='row'>
           <ToolBar />
           <Board />

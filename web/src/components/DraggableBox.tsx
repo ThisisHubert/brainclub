@@ -4,7 +4,6 @@ import { ItemTypes } from 'model/ItemTypes'
 
 const style: React.CSSProperties = {
   position: 'absolute',
-  padding: '0.5rem 1rem',
   cursor: 'move',
 }
 

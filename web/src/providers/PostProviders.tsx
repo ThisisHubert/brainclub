@@ -1,5 +1,5 @@
 import { CLUSTER_SIZE, POST_CARD_SIZE } from 'const'
-import _ from 'lodash'
+import _, { uniqueId } from 'lodash'
 import React, {
   createContext,
   ReactElement,
@@ -19,6 +19,17 @@ export interface PostMap {
   [key: string]: Post
 }
 
+export interface ClusterBoxType {
+  id: string
+  top: number
+  left: number
+  title: string
+}
+
+export interface ClusterBoxMap {
+  [key: string]: ClusterBoxType
+}
+
 interface PostContextType {
   postMap: PostMap
   setPostMap: (postMap: PostMap) => void
@@ -26,6 +37,7 @@ interface PostContextType {
   updatePost: (id: string, text: string) => void
   organizePosts: () => void
   deletePost: (id: string) => void
+  clusterMap: ClusterBoxMap
 }
 
 export const PostContext = createContext<PostContextType>(undefined as never)
@@ -58,26 +70,41 @@ function requestOrganizeMock(posts: Post[]): Cluster[] {
 
 function PostProvider(props: Props): ReactElement {
   const [postMap, setPostMap] = useState<PostMap>({})
+  const [clusterMap, setClusterMap] = useState<ClusterBoxMap>({})
 
   const organizePosts = useCallback(() => {
     // Send all the posts to server
     const posts = _.values(postMap)
     const clusters = requestOrganizeMock(posts)
     clusters.forEach((cluster, index) => {
-      const yPos = (CLUSTER_SIZE.height + ((index !== 0) ? 32 : 0 )) * index
+      // const yPos = (CLUSTER_SIZE.height + (index !== 0 ? 32 : 0)) * index
+      const yPos = (CLUSTER_SIZE.height) * index
       cluster.postIds.forEach((postId, index) => {
         if (!postMap[postId]) {
           return
         }
-        postMap[postId].top = yPos
-        postMap[postId].left = ((POST_CARD_SIZE.width + ((index !== 0) ? 50 : 0 )) * index)
+        postMap[postId].top = yPos + POST_CARD_SIZE.topPadding
+        postMap[postId].left =
+          (POST_CARD_SIZE.width + POST_CARD_SIZE.gapPadding) * index + POST_CARD_SIZE.leftPadding
       })
     })
-
+    setClusterMap((prev) =>
+      _.keyBy(
+        clusters.map((cluster, index) => ({
+          id: cluster.name,
+          title: cluster.name,
+          top: (CLUSTER_SIZE.height) * index + 32,
+          left: 0,
+        })),
+        'id'
+      )
+    )
     setPostMap((prev) => ({
       ...postMap,
     }))
   }, [postMap])
+
+  console.log(postMap)
 
   return (
     <PostContext.Provider
@@ -98,7 +125,8 @@ function PostProvider(props: Props): ReactElement {
             },
           })),
         organizePosts,
-        deletePost: (id) => setPostMap(prev => _.omit(prev, id))
+        deletePost: (id) => setPostMap((prev) => _.omit(prev, id)),
+        clusterMap,
       }}
     >
       {props.children}
