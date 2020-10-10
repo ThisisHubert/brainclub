@@ -1,4 +1,4 @@
-import { Avatar, Box, Typography } from '@material-ui/core'
+import { Avatar, Box, makeStyles, Typography } from '@material-ui/core'
 import { PostContext } from 'providers/PostProviders'
 import React, { ReactElement, useContext } from 'react'
 import image1 from 'assets/images/image1.jpeg'
@@ -12,8 +12,17 @@ interface StyleProps {
   backgroundColor: string
 }
 
+const useStyles = makeStyles({
+  avatar: {
+    padding: '13px 18px',
+    borderRadius: '16px',
+    border: 'solid 1px #ededed',
+  },
+})
+
 export function Header(): ReactElement {
   const { organizePosts } = useContext(PostContext)
+  const classes = useStyles()
   return (
     <Box
       pt={5}
@@ -23,23 +32,30 @@ export function Header(): ReactElement {
       flexDirection='row'
       justifyContent='space-between'
     >
-      <Box
-        border='solid 1px #707070'
-        borderRadius={5}
-        width={456}
-        display='flex'
-        px={5}
-        py={1.5}
-        alignItems='center'
-      >
-        <Box height={32} width={32} bgcolor='#6036d3' />
-        <Box ml={7} />
-        <Typography variant={'h3'} color='primary'>
-          Brain Club
-        </Typography>
-      </Box>
       <Box display='flex' flexDirection='row' alignItems='center'>
-        <Box display='flex' flexDirection='row' mr={2}>
+        <Box
+          border='solid 1px #707070'
+          borderRadius={5}
+          width={456}
+          display='flex'
+          px={5}
+          py={1.5}
+          alignItems='center'
+        >
+          <Box height={32} width={32} bgcolor='#6036d3' />
+          <Box ml={7} />
+          <Typography variant={'h3'} color='primary'>
+            Brain Club
+          </Typography>
+        </Box>
+        <Box ml={2} />
+        <Box
+          display='flex'
+          flexDirection='row'
+          mr={2}
+          bgcolor='white'
+          className={classes.avatar}
+        >
           <Avatar src={image1} />
           <Box ml={0.5} />
           <Avatar src={image2} />
@@ -48,6 +64,9 @@ export function Header(): ReactElement {
           <Box ml={0.5} />
           <Avatar src={image4} />
         </Box>
+        <Box ml={2} />
+      </Box>
+      <Box display='flex' flexDirection='row' alignItems='center'>
         <Box ml={2} />
         <Suggestions />
         <Box ml={2} />
