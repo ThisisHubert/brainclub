@@ -54,7 +54,7 @@ function SuggestingDrawer(): ReactElement {
         <React.Fragment key={anchor}>
           <ActionButton
             title={'Suggestion'}
-            callback={() => toggleDrawer(anchor, true)}
+            callback={() => setState({ ...state, [anchor]: true })}
           />
           <Drawer
             anchor={anchor}

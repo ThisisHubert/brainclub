@@ -27,7 +27,7 @@ export function Header(): ReactElement {
   return (
     <Box
       pt={5}
-      pl={9}
+      ml={3}
       pb={13}
       display='flex'
       flexDirection='row'
