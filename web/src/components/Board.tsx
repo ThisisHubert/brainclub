@@ -13,10 +13,8 @@ interface DragItem {
   top: number
 }
 
-const SuggestionAreaWidth = 200
-
 const styles: React.CSSProperties = {
-  width: `calc(100vw - ${SuggestionAreaWidth}px)`,
+  width: '100vw',
   height: '100vh',
   border: '1px solid black',
   position: 'relative',
