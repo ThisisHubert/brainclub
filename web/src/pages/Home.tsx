@@ -5,6 +5,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 import ToolBar from 'components/ToolBar'
 import { Box } from '@material-ui/core'
 import PostProvider from 'providers/PostProviders'
+import Suggestions from 'components/Suggestions'
 
 function Home(): ReactElement {
   return (
@@ -14,6 +15,7 @@ function Home(): ReactElement {
           <ToolBar />
           <Board />
         </Box>
+        <Suggestions />
       </PostProvider>
     </DndProvider>
   )
