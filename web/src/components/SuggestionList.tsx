@@ -47,8 +47,8 @@ const useStyles = makeStyles((theme: Theme) =>
 function SuggestionList(): ReactElement{
   const classes = useStyles();
   const { addPost } = useContext(PostContext)
-  const[suggestions, setSuggestions] = useState(['Suggestion 1', 'Suggestion 2', 'Suggestion 3']);
-    
+  const[suggestions, setSuggestions] = useState(['substance', 'sound']);
+
   const AcceptSuggestion = (props: string) => {
     addPost({
       id: uniqueId(),
