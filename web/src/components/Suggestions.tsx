@@ -10,6 +10,54 @@ import ListItemText from '@material-ui/core/ListItemText'
 import SuggestionList from 'components/SuggestionList'
 import { ActionButton } from './ActionButton'
 
+
+const useStyles = makeStyles({
+  list: {
+    width: 250,
+  },
+  fullList: {
+    width: 'auto',
+  },
+  suggestingBtn: {
+    width: '190px',
+    height: '60px',
+    borderRadius: '16px',
+    boxShadow: '0 4px 10px 0 rgba(0, 0, 0, 0.16)',
+    backgroundColor: '#38a3b4',
+  },
+  text: {
+    width: '101px',
+    height: '26px',
+    fontFamily: 'Roboto',
+    fontSize: '20px',
+    fontWeight: 500,
+    fontStretch: 'normal',
+    fontStyle: 'normal',
+    lineHeight: '1.3',
+    letterSpacing: 'normal',
+    textAlign: 'left',
+    color: '#ffffff',
+  },
+  title: {
+    width: '176px',
+    height: '126px',
+    fontFamily: 'Roboto',
+    fontSize: '32px',
+    fontWeight: 'bold',
+    fontStretch: 'normal',
+    fontStyle: 'normal',
+    lineHeight: '1.22',
+    letterSpacing: 'normal',
+    textAlign: 'left',
+    color: '#000000',
+  },
+  boxImage: {
+    width: '250px',
+    height: '250px',
+    backgroundColor: 'ededed',
+  }
+});
+
 function SuggestingDrawer(): ReactElement {
   const classes = useStyles()
   const [state, setState] = React.useState({
@@ -36,13 +84,12 @@ function SuggestingDrawer(): ReactElement {
       /*onClick={toggleDrawer(anchor, false)}*/
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
-        {['AI Suggestion'].map((text, index) => (
-          <ListItem key={text}>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
+      <div className={classes.boxImage}>
+         <div className={classes.title}>
+        Brain club's new idea suggestions
+        </div>
+      </div>
+
       <Divider />
       <SuggestionList />
     </div>
@@ -68,29 +115,6 @@ function SuggestingDrawer(): ReactElement {
     </div>
   )
 }
-
-function Display() {}
-
-const useStyles = makeStyles({
-  list: {
-    width: 250,
-  },
-  fullList: {
-    width: 'auto',
-  },
-  suggestingBtn: {
-    display: 'relative',
-    right: '0',
-    color: 'white',
-    backgroundColor: '#6036d3',
-    textTransform: 'none',
-    fontSize: '16px',
-    padding: '12px 32px',
-    boxShadow: `0 3px 6px 0 rgba(0, 0, 0, 0.16)`,
-    border: `solid 1px #707070`,
-  },
-})
-
 type Anchor = 'right'
 
 /*
