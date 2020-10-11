@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { ReactElement } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
@@ -8,13 +7,6 @@ import Divider from '@material-ui/core/Divider'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-=======
-import React, { ReactElement } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
->>>>>>> 4a0cb903... Added legend, styling
 import SuggestionList from 'components/SuggestionList'
 import { ActionButton } from './ActionButton'
 
@@ -107,7 +99,6 @@ function SuggestingDrawer(): ReactElement {
     <div>
       {(['right'] as Anchor[]).map((anchor) => (
         <React.Fragment key={anchor}>
-<<<<<<< HEAD
           <ActionButton
             title={'Suggestion'}
             callback={() => setState({ ...state, [anchor]: true })}
@@ -117,10 +108,6 @@ function SuggestingDrawer(): ReactElement {
             open={state[anchor]}
             onClose={toggleDrawer(anchor, false)}
           >
-=======
-          <Button className={classes.suggestingBtn} onClick={toggleDrawer(anchor, true)}><div className={classes.text}>Suggestion</div></Button>
-          <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
->>>>>>> 4a0cb903... Added legend, styling
             {list(anchor)}
           </Drawer>
         </React.Fragment>
@@ -128,30 +115,6 @@ function SuggestingDrawer(): ReactElement {
     </div>
   )
 }
-
-<<<<<<< HEAD
-function Display() {}
-
-const useStyles = makeStyles({
-  list: {
-    width: 250,
-  },
-  fullList: {
-    width: 'auto',
-  },
-  suggestingBtn: {
-    display: 'relative',
-    right: '0',
-    color: 'white',
-    backgroundColor: '#6036d3',
-    textTransform: 'none',
-    fontSize: '16px',
-    padding: '12px 32px',
-    boxShadow: `0 3px 6px 0 rgba(0, 0, 0, 0.16)`,
-    border: `solid 1px #707070`,
-  },
-})
-
 type Anchor = 'right'
 
 /*
@@ -221,9 +184,3 @@ function Suggestions(): ReactElement{
 
 */
 export default SuggestingDrawer
-=======
-type Anchor = 'right';
-
-export default SuggestingDrawer;
-
->>>>>>> 4a0cb903... Added legend, styling
