@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     list: {
       fontFamily: 'Roboto',
-      fontSize: '17px',
+      fontSize: '24px',
       fontWeight: 500,
       fontStretch: 'normal',
       fontStyle: 'normal',

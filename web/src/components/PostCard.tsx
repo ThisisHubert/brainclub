@@ -24,9 +24,89 @@ const useStyles = makeStyles({
   },
   inputText: {
     fontSize: 24,
-    lineHeight: .9,
+    lineHeight: 0.9,
   },
 })
+
+const censoringWords = [
+  'anal',
+  'anus',
+  'arse',
+  'ass',
+  'ballsack',
+  'balls',
+  'bastard',
+  'bitch',
+  'biatch',
+  'bloody',
+  'blowjob',
+  'blow job',
+  'bollock',
+  'bollok',
+  'boner',
+  'boob',
+  'bugger',
+  'bum',
+  'butt',
+  'buttplug',
+  'clitoris',
+  'cock',
+  'coon',
+  'crap',
+  'cunt',
+  'damn',
+  'dick',
+  'dildo',
+  'dyke',
+  'fag',
+  'feck',
+  'fellate',
+  'fellatio',
+  'felching',
+  'fuck',
+  'f u c k',
+  'fudgepacker',
+  'fudge packer',
+  'flange',
+  'Goddamn',
+  'God damn',
+  'hell',
+  'homo',
+  'jerk',
+  'jizz',
+  'knobend',
+  'knob end',
+  'labia',
+  'lmao',
+  'lmfao',
+  'muff',
+  'nigger',
+  'nigga',
+  'omg',
+  'penis',
+  'piss',
+  'poop',
+  'prick',
+  'pube',
+  'pussy',
+  'queer',
+  'scrotum',
+  'sex',
+  'shit',
+  's hit',
+  'sh1t',
+  'slut',
+  'smegma',
+  'spunk',
+  'tit',
+  'tosser',
+  'turd',
+  'twat',
+  'vagina',
+  'wank',
+  'whore',
+  'wtf',
+]
 
 export interface BoxProps {
   id: string
@@ -36,11 +116,20 @@ export interface BoxProps {
 
 export function PostCard({ title, id, color }: BoxProps): ReactElement {
   const classes = useStyles({
-    backgroundColor: color
+    backgroundColor: color,
   })
-  const { updatePost, deletePost } = useContext(PostContext)
+  const { postMap, updatePost, deletePost } = useContext(PostContext)
+  const hasError = !postMap[id].title
+    .split(' ')
+    .every((word) => !censoringWords.includes(word))
   return (
-    <Box className={classes.root} padding={2} display="flex" justifyContent='space-between' flexDirection='column'>
+    <Box
+      className={classes.root}
+      padding={2}
+      display='flex'
+      justifyContent='space-between'
+      flexDirection='column'
+    >
       <Box display='flex' flexDirection='row-reverse' flexGrow={1}>
         <Button className={classes.button} onClick={() => deletePost(id)}>
           <Close htmlColor='#a8a5a5' />
@@ -58,6 +147,8 @@ export function PostCard({ title, id, color }: BoxProps): ReactElement {
           },
         }}
         onChange={(e) => updatePost(id, e.target.value)}
+        error={hasError}
+        helperText={hasError ? 'Censoring AI cat bad texts' : ''}
       />
       <Box display='flex' flexDirection='row-reverse' flexGrow={1}>
         <Button className={classes.button} onClick={() => {}}>
