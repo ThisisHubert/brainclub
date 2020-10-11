@@ -23,7 +23,8 @@ const useStyles = makeStyles({
     lineHeight: 1,
   },
   inputText: {
-    fontSize: 15,
+    fontSize: 24,
+    lineHeight: .9,
   },
 })
 

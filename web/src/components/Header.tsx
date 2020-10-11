@@ -8,6 +8,7 @@ import image4 from 'assets/images/image4.jpeg'
 import Suggestions from 'components/Suggestions'
 import { ActionButton } from './ActionButton'
 import logo from 'assets/images/logo.svg'
+import Legend from './Legend'
 
 interface StyleProps {
   backgroundColor: string

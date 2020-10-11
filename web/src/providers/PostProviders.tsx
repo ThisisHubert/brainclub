@@ -55,16 +55,16 @@ interface Cluster {
 function requestOrganizeMock(posts: Post[]): Cluster[] {
   return [
     {
-      name: 'coffee',
-      postIds: ['1', '2', '3'],
+      name: 'message',
+      postIds: ['1', '2'],
     },
     {
-      name: 'bread',
+      name: 'voice',
+      postIds: ['3'],
+    },
+    {
+      name: 'chatbot',
       postIds: ['4', '5'],
-    },
-    {
-      name: 'chicken',
-      postIds: ['6', '7', '8'],
     },
   ]
 }
