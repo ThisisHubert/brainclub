@@ -7,6 +7,7 @@ import image3 from 'assets/images/image3.jpeg'
 import image4 from 'assets/images/image4.jpeg'
 import Suggestions from 'components/Suggestions'
 import { ActionButton } from './ActionButton'
+import logo from 'assets/images/logo.svg'
 
 interface StyleProps {
   backgroundColor: string
@@ -34,17 +35,27 @@ export function Header(): ReactElement {
       justifyContent='space-between'
     >
       <Box display='flex' flexDirection='row' alignItems='center'>
+        <Box width={92}>
+          <img src={logo} alt='' />
+        </Box>
+        <Box ml={2} />
         <Box
           className={classes.container}
-          width={456}
+          width={338}
           display='flex'
           px={5}
           py={1.5}
           alignItems='center'
         >
-          <Box height={32} width={32} bgcolor='#6036d3' />
-          <Box ml={7}>
-            <Typography variant={'h3'} color='primary'>
+          <Box ml={2}>
+            <Typography
+              style={{
+                lineHeight: 'unset',
+              }}
+              display='block'
+              variant='h3'
+              component='h3'
+            >
               Brain Club
             </Typography>
           </Box>
