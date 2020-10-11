@@ -80,6 +80,7 @@ export function Header(): ReactElement {
         <Box ml={2} />
       </Box>
       <Box display='flex' flexDirection='row' alignItems='center'>
+        <Legend />
         <Box ml={2} />
         <Suggestions />
         <Box ml={2} />

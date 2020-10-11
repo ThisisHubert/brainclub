@@ -25,6 +25,7 @@ export interface ClusterBoxType {
   top: number
   left: number
   title: string
+  color?: string
 }
 
 export interface ClusterBoxMap {
@@ -107,6 +108,7 @@ function PostProvider(props: Props): ReactElement {
           title: cluster.name,
           top: (CLUSTER_SIZE.height) * index + 32,
           left: 0,
+          color: suffledColors[index]
         })),
         'id'
       )
