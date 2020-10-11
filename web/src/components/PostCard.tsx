@@ -5,7 +5,7 @@ import { PostContext } from 'providers/PostProviders'
 import React, { ReactElement, useContext } from 'react'
 
 interface StyleProps {
-  backgroundColor: string
+  backgroundColor?: string
 }
 
 const useStyles = makeStyles({
@@ -14,7 +14,7 @@ const useStyles = makeStyles({
     height: POST_CARD_SIZE.height,
     cursor: 'move',
     boxShadow: '4px 4px 10px 0 rgba(0, 0, 0, 0.1)',
-    backgroundColor: '#d8d8d8',
+    backgroundColor: (props: StyleProps) => props.backgroundColor ?? '#d8d8d8',
     borderRadius: 10,
   },
   button: {
@@ -30,10 +30,13 @@ const useStyles = makeStyles({
 export interface BoxProps {
   id: string
   title: string
+  color?: string
 }
 
-export function PostCard({ title, id }: BoxProps): ReactElement {
-  const classes = useStyles()
+export function PostCard({ title, id, color }: BoxProps): ReactElement {
+  const classes = useStyles({
+    backgroundColor: color
+  })
   const { updatePost, deletePost } = useContext(PostContext)
   return (
     <Box className={classes.root} padding={2} display="flex" justifyContent='space-between' flexDirection='column'>

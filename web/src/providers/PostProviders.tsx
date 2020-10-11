@@ -13,6 +13,7 @@ export interface Post {
   top: number
   left: number
   title: string
+  color?: string
 }
 
 export interface PostMap {
@@ -68,6 +69,14 @@ function requestOrganizeMock(posts: Post[]): Cluster[] {
   ]
 }
 
+const clusterColors = [
+  '#dfe494',
+  '#eec379',
+  '#e99a75',
+  '#5acaf1',
+  '#aa8fef',
+]
+
 function PostProvider(props: Props): ReactElement {
   const [postMap, setPostMap] = useState<PostMap>({})
   const [clusterMap, setClusterMap] = useState<ClusterBoxMap>({})
@@ -76,9 +85,10 @@ function PostProvider(props: Props): ReactElement {
     // Send all the posts to server
     const posts = _.values(postMap)
     const clusters = requestOrganizeMock(posts)
-    clusters.forEach((cluster, index) => {
+    const suffledColors = _.shuffle(clusterColors);
+    clusters.forEach((cluster, clusterIndex) => {
       // const yPos = (CLUSTER_SIZE.height + (index !== 0 ? 32 : 0)) * index
-      const yPos = (CLUSTER_SIZE.height) * index
+      const yPos = (CLUSTER_SIZE.height) * clusterIndex
       cluster.postIds.forEach((postId, index) => {
         if (!postMap[postId]) {
           return
@@ -86,6 +96,8 @@ function PostProvider(props: Props): ReactElement {
         postMap[postId].top = yPos + POST_CARD_SIZE.topPadding
         postMap[postId].left =
           (POST_CARD_SIZE.width + POST_CARD_SIZE.gapPadding) * index + POST_CARD_SIZE.leftPadding
+        postMap[postId].color = suffledColors[clusterIndex]
+
       })
     })
     setClusterMap((prev) =>

@@ -50,10 +50,10 @@ function Board(): ReactElement {
   return (
     <div ref={drop} style={styles}>
       {Object.keys(postMap).map((key) => {
-        const { title } = postMap[key]
+        const { title, color } = postMap[key]
         return (
           <DraggableBox key={key} {...postMap[key]}>
-            <PostCard id={key} title={title} />
+            <PostCard id={key} title={title} color={color} />
           </DraggableBox>
         )
       })}
