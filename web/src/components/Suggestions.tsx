@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { ReactElement } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
@@ -7,8 +8,63 @@ import Divider from '@material-ui/core/Divider'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
+=======
+import React, { ReactElement } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
+>>>>>>> 4a0cb903... Added legend, styling
 import SuggestionList from 'components/SuggestionList'
 import { ActionButton } from './ActionButton'
+
+
+const useStyles = makeStyles({
+  list: {
+    width: 250,
+  },
+  fullList: {
+    width: 'auto',
+  },
+  suggestingBtn: {
+    width: '190px',
+    height: '60px',
+    borderRadius: '16px',
+    boxShadow: '0 4px 10px 0 rgba(0, 0, 0, 0.16)',
+    backgroundColor: '#38a3b4',
+  },
+  text: {
+    width: '101px',
+    height: '26px',
+    fontFamily: 'Roboto',
+    fontSize: '20px',
+    fontWeight: 500,
+    fontStretch: 'normal',
+    fontStyle: 'normal',
+    lineHeight: '1.3',
+    letterSpacing: 'normal',
+    textAlign: 'left',
+    color: '#ffffff',
+  },
+  title: {
+    width: '176px',
+    height: '126px',
+    fontFamily: 'Roboto',
+    fontSize: '32px',
+    fontWeight: 'bold',
+    fontStretch: 'normal',
+    fontStyle: 'normal',
+    lineHeight: '1.22',
+    letterSpacing: 'normal',
+    textAlign: 'left',
+    color: '#000000',
+  },
+  boxImage: {
+    width: '250px',
+    height: '250px',
+    backgroundColor: 'ededed',
+  }
+});
 
 function SuggestingDrawer(): ReactElement {
   const classes = useStyles()
@@ -36,13 +92,12 @@ function SuggestingDrawer(): ReactElement {
       /*onClick={toggleDrawer(anchor, false)}*/
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
-        {['AI Suggestion'].map((text, index) => (
-          <ListItem key={text}>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
+      <div className={classes.boxImage}>
+         <div className={classes.title}>
+        Brain club's new idea suggestions
+        </div>
+      </div>
+
       <Divider />
       <SuggestionList />
     </div>
@@ -52,6 +107,7 @@ function SuggestingDrawer(): ReactElement {
     <div>
       {(['right'] as Anchor[]).map((anchor) => (
         <React.Fragment key={anchor}>
+<<<<<<< HEAD
           <ActionButton
             title={'Suggestion'}
             callback={() => setState({ ...state, [anchor]: true })}
@@ -61,6 +117,10 @@ function SuggestingDrawer(): ReactElement {
             open={state[anchor]}
             onClose={toggleDrawer(anchor, false)}
           >
+=======
+          <Button className={classes.suggestingBtn} onClick={toggleDrawer(anchor, true)}><div className={classes.text}>Suggestion</div></Button>
+          <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
+>>>>>>> 4a0cb903... Added legend, styling
             {list(anchor)}
           </Drawer>
         </React.Fragment>
@@ -69,6 +129,7 @@ function SuggestingDrawer(): ReactElement {
   )
 }
 
+<<<<<<< HEAD
 function Display() {}
 
 const useStyles = makeStyles({
@@ -160,3 +221,9 @@ function Suggestions(): ReactElement{
 
 */
 export default SuggestingDrawer
+=======
+type Anchor = 'right';
+
+export default SuggestingDrawer;
+
+>>>>>>> 4a0cb903... Added legend, styling
